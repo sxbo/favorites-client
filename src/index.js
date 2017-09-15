@@ -1,8 +1,8 @@
 import React from 'react';
 import {render} from 'react-dom'
-import RouterConfig from './module/favorite/route.js'
+import Redux from './module/favorite/redux.js'
 
 render(   
-    <RouterConfig/>,
+    <Redux/>,
     document.getElementById('app')
 )
