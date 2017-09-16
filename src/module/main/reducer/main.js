@@ -1,6 +1,5 @@
 import {ActionType} from '../res/R'
-
-
+//redux整个状态池中的一部分，存放项目中某个模块的state
 const initState = {
     collectObject:null,
 }

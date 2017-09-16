@@ -8,5 +8,6 @@ export default {
             type:ActionType.LOAD_COLLECT_OBJECT,
             data:props
         }
+
     )
 }

@@ -4,7 +4,16 @@ import {render} from 'react-dom'
 import styled from 'styled-components'
 import {BrowserRouter as Router ,Route,Link } from 'react-router-dom'
 import {Form,Icon,Input,Button,Checkbox} from 'antd'
+
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import  favoriteAction from '../action/Action'
+
 const FormItem = Form.Item;
+
+
+
+
 const Root = styled.div`
      width:100%;
      height:100%;
@@ -39,11 +48,16 @@ const Root = styled.div`
 `
 class FeedbackComponent extends React.Component{
 
+    componentWillMount () {
+
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
-            console.log('Received values of form: ', values);
+              let {favFeedback} = this.props;
+              favFeedback(values);
           }
         });
     }
@@ -54,25 +68,25 @@ class FeedbackComponent extends React.Component{
                 <div className="login-form">
                     <Form onSubmit={this.handleSubmit} >
                         <div className="logo">
-                            <Link to="/"><img src={require('../../res/img/logo.png')}/></Link>
+                            <Link to="/"><img src={require('../../../res/img/logo.png')}/></Link>
                         </div>
                         <div className="title">欢迎反馈</div>
                         <FormItem>
-                        {getFieldDecorator('feedBack', {
+                        {getFieldDecorator('feedBackAdvice', {
                             rules: [{ required: true, message: 'Please input your feedback!' }],
                         })(
                             <Input.TextArea rows={4} prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="input your feedback!" />
                         )}
                         </FormItem>
                         <FormItem>
-                        {getFieldDecorator('userName', {
+                        {getFieldDecorator('feedBackName', {
                             rules: [{ required: true, message: 'Please input your username!' }],
                         })(
                             <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="your name" />
                         )}
                         </FormItem>
                         <FormItem>
-                        {getFieldDecorator('password', {
+                        {getFieldDecorator('phone', {
                             rules: [{ required: true, message: 'Please input your Password!' }],
                         })(
                             <Input prefix={<Icon type="mail" style={{ fontSize: 13 }} />}  placeholder="your link" />
@@ -92,4 +106,18 @@ class FeedbackComponent extends React.Component{
 
 const Feedback = Form.create()(FeedbackComponent);
 
-export default Feedback;
+/**
+ *
+ * @param state :redux store中的state
+ * @returns {{}}
+ */
+function mapStateToProps(state) {
+    return {
+        favorite:state.favorite
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(favoriteAction,dispatch)
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Feedback);

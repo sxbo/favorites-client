@@ -4,11 +4,7 @@ import {render} from 'react-dom'
 import {Link} from 'react-router-dom'
 
 class Collect extends React.Component{
-    
-    
-    
-    
-    
+
     render(){
         return(
             <div>
