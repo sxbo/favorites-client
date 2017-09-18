@@ -46,6 +46,10 @@ const Root = styled.div`
 
     }
 `
+/**
+ *@Author xiaobo  [https://github.com/sxbo]
+ *@Date 2017/9/16 16:13
+ */
 class FeedbackComponent extends React.Component{
 
     componentWillMount () {
@@ -108,7 +112,7 @@ const Feedback = Form.create()(FeedbackComponent);
 
 /**
  *
- * @param state :redux store中的state
+ * @param state :redux store state
  * @returns {{}}
  */
 function mapStateToProps(state) {

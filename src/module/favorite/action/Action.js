@@ -14,7 +14,9 @@ export default {
                 }
             })
             .catch(err => {
-                    message.error(err)
+                if (err.response) {
+                    message.warn("请求失败，请检查服务器！")
+                }
                 }
             )
     }

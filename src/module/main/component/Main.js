@@ -5,7 +5,7 @@ import {render} from 'react-dom'
 import {Link,Route} from 'react-router-dom'
 import Collect from './Collect'
 import Find from './Find'
-import User from '../../user/User'
+import User from '../../user/component/User'
 class Main extends React.Component{
     
     render(){

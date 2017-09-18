@@ -12,12 +12,14 @@ import RouterConfig from './router.js'
 ///////////////////////////////导入各模块的ruducer///////////////////////////////////////////////////////////////
 import main from '../main/reducer/main.js'
 import favorite from './reducer/favorite'
+import user from '../user/reducer/user'
 
 //存放reducer的state池
 const reducer = combineReducers(
     {
         main,
         favorite,
+        user,
     }
 )
 axios.defaults.baseURL = '/api';

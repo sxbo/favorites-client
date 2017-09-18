@@ -1,8 +1,14 @@
 //用户反馈页面
 import React from 'react'
 import {render} from 'react-dom'
+
+
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import userAction from '../action/Action'
+
 import styled from 'styled-components'
-import {BrowserRouter as Router ,Route,Link } from 'react-router-dom'
+import {BrowserRouter as Router ,Route,Link,Redirect} from 'react-router-dom'
 import {Form,Icon,Input,Button,Checkbox} from 'antd'
 const FormItem = Form.Item;
 const Root = styled.div`
@@ -38,18 +44,36 @@ const Root = styled.div`
     }
 `
 class RegistComponent extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            toLogin:false,
+        }
+    }
+
+    toLogin(e){
+        if(e){
+            this.setState ({
+                toLogin:true,
+            })
+        }
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
-            console.log('Received values of form: ', values);
+              let {regist} = this.props;
+              regist(values)
           }
         });
     }
     render () {
         const { getFieldDecorator } = this.props.form;
-        return (   
+        if (this.state.toLogin){
+            return <Redirect to={{pathname:"/login"}}></Redirect>
+        }
+        return (
             <Root>
                 <div className="login-form">
                     <Form onSubmit={this.handleSubmit} >
@@ -85,7 +109,7 @@ class RegistComponent extends React.Component{
                         <div className="title">
                             已有用户？
                         </div>
-                        <Button type="primary"  className="login-form-button">
+                        <Button type="primary" onClick={this.toLogin.bind(this)}  className="login-form-button">
                             to login
                         </Button>
                     </Form>
@@ -95,5 +119,15 @@ class RegistComponent extends React.Component{
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        user:state.user
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators (userAction,dispatch)
+}
+
 const Regist = Form.create()(RegistComponent);
-export default Regist;
+export default connect(mapStateToProps,mapDispatchToProps)(Regist);
