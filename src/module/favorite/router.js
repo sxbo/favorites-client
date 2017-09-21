@@ -14,13 +14,13 @@ import Regist from '../user/component/Regist'
 
 
 // import {routes} from '__public/Router.js'
-import {BrowserRouter as Router ,Route,Link,Switch } from 'react-router-dom'
+import {BrowserRouter as Router ,Route,Link,Switch} from 'react-router-dom'
 
 
 class RouterConfig extends React.Component{
     render () {
         return (
-            <Router >
+            <Router>
                 <div>
                         <Route exact path="/" component={Favorite}/>
                         <Route path="/login" component={Login}/>

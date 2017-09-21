@@ -3,7 +3,12 @@ import React from 'react'
 import {render} from 'react-dom'
 import styled from 'styled-components'
 import {Form,Icon,Input,Button,Checkbox} from 'antd'
-import {BrowserRouter as Router ,Route,Link } from 'react-router-dom'
+import {BrowserRouter as Router,Route,Link,Redirect} from 'react-router-dom'
+
+import userAction from '../action/Action'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+
 const FormItem = Form.Item;
 const Root = styled.div`
      width:100%;
@@ -41,25 +46,41 @@ const Root = styled.div`
 
 class LoginForm extends React.Component{
 
+    constructor(props){
+        super(props)
+        this.state = {
+            loginstatus:false
+        }
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
-            console.log('Received values of form: ', values);
+              let {login} = this.props;
+              login (values,(user)=>{
+                  //登录成功后前端要做的事
+                  //this.props.history.push("/main")
+                  sessionStorage.setItem("user",user);
+                  this.setState({
+                      loginstatus:true
+                  })
+
+              })
           }
         });
     }
 
     render () {
         const { getFieldDecorator } = this.props.form;
+        if (this.state.loginstatus){
+            return <Redirect to="/main"></Redirect>
+        }
 
         return (
 
             <Root>
                 <div className="login-form">
-                    
-
                     <Form onSubmit={this.handleSubmit} >
                         <div className="logo">
                             <Link to="/"><img src={require('../../../res/img/logo.png')}/></Link>
@@ -73,7 +94,7 @@ class LoginForm extends React.Component{
                         )}
                         </FormItem>
                         <FormItem>
-                        {getFieldDecorator('password', {
+                        {getFieldDecorator('passWord', {
                             rules: [{ required: true, message: 'Please input your Password!' }],
                         })(
                             <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
@@ -95,12 +116,6 @@ class LoginForm extends React.Component{
                     </Form>
                 </div>
             </Root>
-        //     <div>
-        //     <div>welcome</div> 
-        //    <div><Link to="/">主页</Link></div>
-        //    <div><Link to="/main">登录</Link></div>
-        // </div>
-            
         )
     }
 }
@@ -108,4 +123,14 @@ class LoginForm extends React.Component{
 
 const Login = Form.create()(LoginForm);
 
-export default Login;
+function mapStateToProps(state) {
+    return {
+        user:state.user
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators (userAction,dispatch)
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login);

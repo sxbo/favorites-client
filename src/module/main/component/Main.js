@@ -7,7 +7,17 @@ import Collect from './Collect'
 import Find from './Find'
 import User from '../../user/component/User'
 class Main extends React.Component{
-    
+    constructor(props){
+        super(props)
+
+
+    }
+
+    componentWillMount(){
+
+        console.log(this.props)
+    }
+
     render(){
         return(
             <div>

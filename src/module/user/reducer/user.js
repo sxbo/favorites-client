@@ -12,6 +12,11 @@ export default function (state = initState,action) {
                 ...state,
                 loginedUser:action.data
             }
+        case ActionType.USER_LOGIN:
+            return {
+                ...state,
+                loginedUser:action.data
+            }
         default :
             return {
                 ...state
