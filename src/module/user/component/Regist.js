@@ -71,7 +71,8 @@ class RegistComponent extends React.Component{
     render () {
         const { getFieldDecorator } = this.props.form;
         if (this.state.toLogin){
-            return <Redirect to={{pathname:"/login"}}></Redirect>
+            return <Redirect push={true} to={{pathname:"/login"}}></Redirect>
+        //  push为true的话会增加一条历史记录不会替换当前的的路由
         }
         return (
             <Root>

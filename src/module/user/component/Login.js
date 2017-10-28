@@ -6,6 +6,7 @@ import {Form,Icon,Input,Button,Checkbox} from 'antd'
 import {BrowserRouter as Router,Route,Link,Redirect} from 'react-router-dom'
 
 import userAction from '../action/Action'
+import collectAction from '../../collect/action/Action'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 
@@ -57,16 +58,25 @@ class LoginForm extends React.Component{
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
           if (!err) {
-              let {login} = this.props;
-              login (values,(user)=>{
+              let {userAction} = this.props;
+              userAction.login?
+              userAction.login (values,(user)=>{
                   //登录成功后前端要做的事
                   //this.props.history.push("/main")
-                  sessionStorage.setItem("user",user);
-                  this.setState({
+                  //暂时这样处理
+                if(localStorage.getItem("user"))
+                    localStorage.removeItem("user")
+                localStorage.setItem("user",JSON.stringify(user));
+                this.setState({
                       loginstatus:true
-                  })
-
-              })
+                })
+              
+            })
+            :
+            ""
+            //   this.setState({
+            //       loginstatus:true
+            //   })
           }
         });
     }
@@ -74,7 +84,7 @@ class LoginForm extends React.Component{
     render () {
         const { getFieldDecorator } = this.props.form;
         if (this.state.loginstatus){
-            return <Redirect to="/main"></Redirect>
+            return <Redirect push={true} to="/favorite/home"></Redirect>
         }
 
         return (
@@ -130,7 +140,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators (userAction,dispatch)
+    return {
+        userAction:bindActionCreators (userAction,dispatch)
+    }
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Login);

@@ -12,16 +12,19 @@ import thunkMiddleware from 'redux-thunk'
 import RouterConfig from './router.js'
 
 ///////////////////////////////导入各模块的ruducer///////////////////////////////////////////////////////////////
-import main from '../main/reducer/main.js'
-import favorite from './reducer/favorite'
-import user from '../user/reducer/user'
+
+import favorite from '../reducer/favorite'
+import user from '../../user/reducer/user'
+import collect from '../../collect/reducer/collectReducer'
+import util from '../../utils/reducer/reducer'
 
 //存放reducer的state池
 const reducer = combineReducers(
     {
-        main,
         favorite,
         user,
+        collect,
+        util
     }
 )
 axios.defaults.baseURL = '/api';

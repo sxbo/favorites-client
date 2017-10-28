@@ -195,7 +195,7 @@ class Favorite extends React.Component{
             <Content className="content">
                 <div className="picture">
                     <div className="favicon">
-                        <img src={require('../../res/img/favicon.png')}/>
+                        <img src={require('../../../res/img/favicon.png')}/>
                     </div>
                     <div className="colund">
                         云收藏
