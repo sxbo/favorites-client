@@ -38,7 +38,7 @@ axios.interceptors.response.use(
     function (err) {
         //console.log(err.response)
         if(err.response.status === 401){
-            location.assign("/login")
+            location.href = ("/login")
         }
     }
 )
