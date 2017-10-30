@@ -29,5 +29,5 @@
 4.  `收藏github`
 ![image](src/public/screenshots/clg.gif)
 
-## 后续完善其他功能
+## 后续完善其他功能 后台代码移步favorite-server
 
