@@ -5,9 +5,9 @@
  
 ### usage：
 
-1.`git clone https://github.com/sxbo/favorites-client.git <dir-name>`
-2.`cd <dir-name>`
-3.`cnpm i` or `npm i`
+1.	`git clone https://github.com/sxbo/favorites-client.git <dir-name>`
+2.	`cd <dir-name>`
+3.	`cnpm i` or `npm i`
 
 ### run in dev
   `npm run dev`
