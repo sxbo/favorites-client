@@ -20,6 +20,7 @@ import collect from '../../collect/reducer/collectReducer'
 import util from '../../utils/reducer/reducer'
 
 //存放reducer的state池
+//combineReducers对于复杂应用（含多模块时），对reducer进行拆分，各自负责独立模块的state
 const reducer = combineReducers(
     {
         favorite,
