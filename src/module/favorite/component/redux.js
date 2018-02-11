@@ -7,6 +7,7 @@ import  axios from 'axios'
 import {Provider} from 'react-redux'
 import {createStore,applyMiddleware,combineReducers} from 'redux'
 //import {history} from 'react-router-dom'
+//中间件，解决异步操作，得到后台数据后再执行reducer中代码
 import thunkMiddleware from 'redux-thunk'
 ///////////////////////////////导入路由/////////////////////////////////////////////////////////////
 import RouterConfig from './router.js'
