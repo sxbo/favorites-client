@@ -44,6 +44,7 @@ axios.interceptors.response.use(
     }
 )
 //存放state池的store
+//applyMiddleware（...middlewares）将所有中间件作为参数，存放在一个数组中，按顺序依次执行，这里中间件的前后顺序很有讲究！
 const store = createStore(reducer,applyMiddleware(thunkMiddleware))
 
 class Redux extends React.Component{
